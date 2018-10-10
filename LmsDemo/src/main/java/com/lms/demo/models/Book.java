@@ -57,6 +57,12 @@ public class Book {
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", bookName=" + bookName + ", author=" + author + ", purchaseDate=" + purchaseDate
+				+ "]";
+	}
 	
 		
 }
