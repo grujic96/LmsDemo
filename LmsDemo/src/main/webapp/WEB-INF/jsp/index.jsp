@@ -20,8 +20,8 @@
 				<a class="navbar-brand" href="/">LMS</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">All Books</a></li>
-				<li><a href="/newBook">New Book</a></li>
+				<li class="active"><a href="/">All Books <div class="glyphicon glyphicon-book"></div></a></li>
+				<li><a href="/newBook">New Book <div class="glyphicon glyphicon-book"></div></a></li>
 			</ul>
 		</div>
 	</nav>

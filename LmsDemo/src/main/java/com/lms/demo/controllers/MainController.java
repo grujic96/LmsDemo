@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -46,15 +47,15 @@ public class MainController {
 	}
 	
 	@PostMapping("/save")
-	public String save(@ModelAttribute Book book,HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public String save(@ModelAttribute Book book,BindingResult bindingResult,HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		lmsService.save(book);
 		req.setAttribute("mode", "BOOK_VIEW");
 		resp.sendRedirect("/");
 		return "index";
 	}
 	
-	@GetMapping("/new")
-	public String newBook(HttpServletRequest req) {
+	@GetMapping("/newBook")
+	public String newBook(HttpServletRequest req){
 		req.setAttribute("mode", "BOOK_NEW");
 		return "index";
 	}
