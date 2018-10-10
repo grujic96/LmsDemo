@@ -36,4 +36,8 @@ public class LmsService{
 		
 	}
 	
+	public void save(Book book) {
+		lmsRepository.save(book);
+	}
+	
 }

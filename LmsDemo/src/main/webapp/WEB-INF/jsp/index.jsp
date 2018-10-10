@@ -17,11 +17,11 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">LMS</a>
+				<a class="navbar-brand" href="/">LMS</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">All Books</a></li>
-				<li><a href="#">New Book</a></li>
+				<li class="active"><a href="/">All Books</a></li>
+				<li><a href="/newBook">New Book</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -54,8 +54,8 @@
 				</table>
 			</c:when>
 
-			<c:when test="${mode =='BOOK_EDIT'}">
-				<form>
+			<c:when test="${mode =='BOOK_EDIT' || mode=='BOOK_NEW'}">
+				<form action="save" method="POST">
 				<input type="hidden"
 							class="form-control" value ="${book.id}" id="id" name="id">
 					<div class="form-group">
