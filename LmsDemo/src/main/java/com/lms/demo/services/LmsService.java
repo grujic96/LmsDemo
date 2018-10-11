@@ -1,4 +1,4 @@
-package com.lms.demo.repositories;
+package com.lms.demo.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lms.demo.models.Book;
+import com.lms.demo.repositories.LmsRepository;
 
 
 @Service
@@ -38,6 +39,10 @@ public class LmsService{
 	
 	public void save(Book book) {
 		lmsRepository.save(book);
+	}
+	
+	public void delete(int id) {
+		lmsRepository.deleteById(id);
 	}
 	
 }
