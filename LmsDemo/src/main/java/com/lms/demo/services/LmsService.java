@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lms.demo.models.Book;
+import com.lms.demo.models.BookGenre;
 import com.lms.demo.repositories.LmsRepository;
 
 
@@ -36,6 +37,18 @@ public class LmsService{
 			return null;
 		
 	}
+	
+	public Collection<Book> findByAuthor(String author){
+		List<Book> books = new ArrayList<Book>();
+		for(Book b : lmsRepository.findAll()) {
+			if (b.getAuthor().contains(author)){
+				books.add(b);
+			}
+		}
+		
+		return books;
+	}
+	
 	
 	public void save(Book book) {
 		lmsRepository.save(book);

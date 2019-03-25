@@ -2,6 +2,7 @@ package com.lms.demo.controllers;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lms.demo.models.Book;
+import com.lms.demo.services.BookGenreService;
 import com.lms.demo.services.LmsService;
 
 @Controller
@@ -27,6 +29,9 @@ public class MainController {
 
 	@Autowired
 	private LmsService lmsService;
+	
+	@Autowired
+	private BookGenreService bookGenreService;
 
 	@GetMapping("/")
 	public String init(HttpServletRequest req) {
@@ -50,6 +55,8 @@ public class MainController {
 	@PostMapping("/save")
 	public String save(@ModelAttribute Book book, BindingResult bindingResult, HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
+		
+		book.setBookGenre(bookGenreService.getGenreByName(req.getParameter("selectedBookGenre")));
 		lmsService.save(book);
 		req.setAttribute("mode", "BOOK_VIEW");
 		resp.sendRedirect("/");
@@ -59,6 +66,9 @@ public class MainController {
 	@GetMapping("/newBook")
 	public String newBook(HttpServletRequest req) {
 		req.setAttribute("mode", "BOOK_NEW");
+		
+		req.setAttribute("bookGenres",bookGenreService.getAllGenres());
+		
 		return "index";
 	}
 
@@ -67,4 +77,25 @@ public class MainController {
 		lmsService.delete(id);
 		resp.sendRedirect("/");
 	}
+	
+	@PostMapping("/findBook")
+	public String findBook(HttpServletRequest req){
+		String author = req.getParameter("text1");
+		Collection<Book> books = lmsService.findByAuthor(author);
+		
+		if (books.isEmpty()){
+			req.setAttribute("mode", "BOOK_NOT_FOUND");
+			req.setAttribute("books", "BOOK NOT FOUND");
+			
+		}
+		else {
+			req.setAttribute("mode", "BOOK_FOUND");
+			req.setAttribute("books", books);
+
+		}
+		return "index";
+	}
+	
+	
+	
 }

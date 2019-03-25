@@ -2,12 +2,14 @@ package com.lms.demo.models;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import com.lms.demo.models.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -33,7 +35,11 @@ public class Book implements Serializable{
 	@Column(name ="purchase_date")
 	@Temporal(TemporalType.DATE)
 	private Date purchaseDate;
-
+	
+	@ManyToOne
+    @JoinColumn(name = "genre_id")
+	private BookGenre bookGenre;
+	
 	public int getId() {
 		return id;
 	}
@@ -64,6 +70,18 @@ public class Book implements Serializable{
 
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
+	}
+
+	public BookGenre getBookGenre() {
+		return bookGenre;
+	}
+
+	public void setBookGenre(BookGenre bookGenre) {
+		this.bookGenre = bookGenre;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

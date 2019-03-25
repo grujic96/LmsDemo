@@ -30,13 +30,6 @@
 
 		<c:choose>
 			<c:when test="${mode == 'BOOK_VIEW'}">
-				<FORM  ACTION="/findBook" METHOD="POST">
-				FIND BOOKS BY AUTHOR:
-        		<INPUT TYPE="TEXT" NAME="text1">
-        		<BR>
-        		<INPUT TYPE="SUBMIT" value="FIND">
-    			</FORM>
-				
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -44,7 +37,6 @@
 							<th>Book Name</th>
 							<th>Author</th>
 							<th>Purchase Date</th>
-							<th>Book Genre</th>
 							<th>EDIT</th>
 							<th>DELETE</th>
 						</tr>
@@ -56,7 +48,6 @@
 								<td>${book.bookName}</td>
 								<td>${book.author}</td>
 								<td>${book.purchaseDate}</td>
-								<td>${book.bookGenre.bookGenre}</td>
 								<td><a href="updateBook?id=${book.id}"><div class="glyphicon glyphicon-pencil"></div></a></td>
 								<td><a href="delete?id=${book.id}"><div class="glyphicon glyphicon-trash"></div></a></td>
 							</tr>
@@ -81,45 +72,9 @@
 						<label for="purchaseDate">Purchase Date</label> <input type="date"
 							class="form-control" value ="${book.purchaseDate}" id="purchaseDate" name="purchaseDate">
 					</div>
-					<div>
-						<select name="selectedBookGenre">
-          					<c:forEach var="list" items="${bookGenres}">
-            					 <option>${list.bookGenre}</option>
-            					 
-          					</c:forEach>
-    					 </select></div>
-    				</div>
 					<button type="submit" class="btn btn-default">Submit</button>
-					</form>
+				</form>
 			</c:when>
-			
-			<c:when test="${mode =='BOOK_FOUND' || mode=='BOOK_NOT_FOUND'}">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Book Name</th>
-							<th>Author</th>
-							<th>Purchase Date</th>
-							<th>EDIT</th>
-							<th>DELETE</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="book" items="${books}">
-							<tr>
-								<td>${book.id}</td>
-								<td>${book.bookName}</td>
-								<td>${book.author}</td>
-								<td>${book.purchaseDate}</td>
-								<td><a href="updateBook?id=${book.id}"><div class="glyphicon glyphicon-pencil"></div></a></td>
-								<td><a href="delete?id=${book.id}"><div class="glyphicon glyphicon-trash"></div></a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:when>
-			
 		</c:choose>
 
 	</div>
